@@ -98,6 +98,11 @@ func ParseFile(fileName string) (parsedGames []PlayedGame, err error) {
 		if csv[0] == GameId {
 			if len(singleGame) > 0 {
 				currentGame, err := CsvToGame(singleGame)
+				if err == nil {
+					parsedGames = append(parsedGames, *currentGame)
+				} else {
+					return nil, err
+				}
 			}
 		}
 	}
@@ -137,4 +142,6 @@ func HandleInfoLine(currentLine []string, game *PlayedGame) (err error) {
 	} else if currentLine[1] == UmpThirdBase {
 
 	}
+
+	return nil
 }
