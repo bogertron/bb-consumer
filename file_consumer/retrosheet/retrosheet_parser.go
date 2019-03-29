@@ -77,6 +77,7 @@ const (
 	StartingPlayers string = "start"
 	Play            string = "play"
 	Substitusion    string = "sub"
+	Commentary      string = "com"
 	Data            string = "data" // consider ignoring
 )
 
@@ -104,6 +105,8 @@ func ParseFile(fileName string) (parsedGames []PlayedGame, err error) {
 					return nil, err
 				}
 			}
+		} else {
+			singleGame = append(singleGame, csv)
 		}
 	}
 
@@ -124,6 +127,12 @@ func CsvToGame(lines [][]string) (game *PlayedGame, err error) {
 		} else if currentLine[0] == Substitusion {
 
 		} else if currentLine[0] == Data {
+
+		} else if currentLine[0] == GameVersion {
+
+		} else if currentLine[0] == Play {
+
+		} else if currentLine[0] == Commentary {
 
 		} else {
 			return nil, fmt.Errorf("Unexpected rotosheet opener on line [%d]: %q", index, currentLine[0])
